@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    body {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background: #f1f1f1  ;
+    }    
+    .slider{
+        position: relative;
+        background: #ccc;
+        height: 271px;
+        width: 901px;
+        margin-top: 150px;
+    }
+    .slider img{
+        position:absolute;
+    }
+    .slider a{
+        display: block;
+        width: 60px;
+        height: 45px;
+        background-color: rgba(0,0,0,.50);
+        z-index: 1000;
+        text-decoration: none;
+        text-align: center;
+        color: #fff;
+        line-height: 45px;
+        font-weight: bold;
+    }
+    .next{
+        position: absolute;
+        right: 0px;
+        top:120px;
+    }
+    .prev{
+        position: absolute;
+        left: 0px;
+        top:120px;
+    }
+    </style>
+</head>
+<body>    
+        <div class="slider">
+            <img src="./sl1.png" class="slider-item" number="0" />
+            <img src="./sl2.png" class="slider-item" number="1" style="display:none;" />
+            <img src="./sl3.png" class="slider-item" number="2" style="display:none;" />
+            <img src="./sl4.png" class="slider-item" number="3" style="display:none;" />
+            <img src="./sl5.png" class="slider-item" number="4"  style="display:none;"/>
+           <a href="#" class="next">Next</a>
+           <a href="#" class="prev">Prev</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script>
+        $(()=>{
+            
+                $('.next').click(function(){ 
+                    changeImage('next');
+                })
+                $('.prev').click(function(){
+                    changeImage('prev');
+                    
+                })
+        })
+        function changeImage(type){
+            let imgSelectVisible = $('img.slider-item:visible');            
+               let imgVisible = parseInt(imgSelectVisible.attr('number'));              
+               let eqNumber = type === 'next' ? imgVisible + 1 : imgVisible - 1 ; 
+               
+               if(eqNumber >= $('.slider-item').length){
+                   eqNumber = 0
+               }                              
+               
+                     $('img.slider-item').eq(eqNumber).fadeIn();
+                     imgSelectVisible.fadeOut();                    
+        }
+            </script>
+    </body>
+</html>
